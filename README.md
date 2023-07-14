@@ -9,8 +9,11 @@ Related repo - ESP32-Timer-GUI, to be done.
 Steps:
 
 0. 100% - learn how to code Arduino in VSC with Platform.io on ESP32
-1. 0% - learn interrupts
-2. 0% - re-learn VL53L0
-3. 0% - learn ESP-NOW
-4. 0% - write code for the PC interface board
-5. 0% - write code for a time keeping program for the PC
+1. 100% - re-learn VL53L0 (good enough for now at least - LED goes on when sensor reports something closer than 1200mm)
+2. 0% - learn ESP-NOW
+3. 0% - write code for the PC interface board
+4. 0% - write code for a time keeping program for the PC
+
+Future updates:
+
+1. Make it work on interrupts

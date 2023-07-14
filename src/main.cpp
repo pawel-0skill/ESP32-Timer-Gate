@@ -1,19 +1,33 @@
 #include <Arduino.h>
+#include <Wire.h>
+#include <VL53L0X.h>
 
-// put function declarations here:
-int myFunction(int, int);
+VL53L0X sensor;
+
+// TOF reading
+int distance = 0;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  // LED
+  pinMode(12, OUTPUT);
+  // TOF
+  Serial.begin(9600);
+  Wire.begin();
+  sensor.setTimeout(500);
+  if (!sensor.init())
+  {
+    Serial.println("Failed to detect and initialize sensor!");
+    while (1) {}
+  }
+  sensor.startContinuous();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  distance = sensor.readRangeContinuousMillimeters();
+  if (distance < 1200) {
+    digitalWrite(12, HIGH);
+  }
+  else {
+    digitalWrite(12, LOW);
+  }
 }
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
-}
-// Hello world?
