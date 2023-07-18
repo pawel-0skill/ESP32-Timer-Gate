@@ -1,3 +1,5 @@
+// Code snippet - get the ToF sensor to work, light a LED when detection is lower than threshold
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <VL53L0X.h>
