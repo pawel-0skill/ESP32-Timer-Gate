@@ -2,7 +2,7 @@
 
 Project idea - use a set of two ESP32 boards and VL53L0 ToF sensors as timing gates for agility courses, communicating with a third ESP32 board over ESP-NOW, itself communication with a PC over USB.
 
-Related repo - ESP32-Timer-Comm, to be done.
+Related repo - [ESP32-Timer-Comms](https://github.com/pawel-0skill/ESP32-Timer-Comms).
 
 Related repo - ESP32-Timer-GUI, to be done.
 
