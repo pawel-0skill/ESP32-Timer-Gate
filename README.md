@@ -10,7 +10,7 @@ Steps:
 
 0. 100% - learn how to code Arduino in VSC with Platform.io on ESP32
 1. 100% - re-learn VL53L0 (good enough for now at least - LED goes on when sensor reports something closer than 1200mm)
-2. 0% - learn ESP-NOW - this is going to be fun, as in poke my eyes out fun
+2. 1% - learn ESP-NOW - this is going to be fun, as in poke my eyes out fun
 3. 0% - write code for the PC communications board
 4. 0% - write code for a time keeping program for the PC
 
