@@ -22,7 +22,16 @@ Future updates:
 
 Typical flow of events should be:
 
-1. Dog enters course. __Devices__ are _paired_ and _waiting_.
+1. __Gates__ are _ready_.
+  - [ ] Initialize ToF sensor.
+  - [ ] When reading lower than threshold, turn LED on.
+  - [ ] When reading lower than threshold for the first time, set control variable true - to avoid sending multiple messages.
+  - [ ] When reading higher than threshold for the rist time, set control variable false.
+  - [ ] Initialize ESP-NOW, connect to Comms.
+  - [ ] If pinged, respond accordingly.
+2. __Comms__ is _ready_.
+  - [ ] Initialize serial port communications.
+3. Dog enters course.
 2. __Comms__ _expects start_ event.
 3. Dog starts run, crosses start gate.
 4. __Start gate__ _registers change_ in ToF sensor reading.
