@@ -18,35 +18,56 @@ Future updates:
 
 1. Make it work on interrupts
 
-# How this is going to work:
+## How this is going to work
 
 Typical flow of events should be:
 
 1. __Gates__ are _ready_.
+   - [ ] Initialize ESP-NOW, connect to comms.
    - [ ] Initialize ToF sensor.
-   - [ ] When reading lower than threshold, turn LED on.
-   - [ ] When reading lower than threshold for the first time, set control variable true - to avoid sending multiple messages.
-   - [ ] When reading higher than threshold for the rist time, set control variable false.
-   - [ ] Initialize ESP-NOW, connect to Comms.
    - [ ] If pinged, respond accordingly.
 2. __Comms__ is _ready_.
    - [ ] Initialize serial port communications.
+   - [ ] Initialize ESP-NOW, connect to start gate and finish gate - for pinging.
+   - [ ] Ping gates.
+   - [ ] Set detection flag variables to False.
+   - [ ] Set event time variables to 0.
 3. Dog enters course.
-2. __Comms__ _expects start_ event.
-3. Dog starts run, crosses start gate.
-4. __Start gate__ _registers change_ in ToF sensor reading.
-5. __Start gate__ _communicates event_ over EPS-NOW to comms.
-6. __Comms__ _registers the time_ of start gate event.
-7. __Comms__ _gives feedback_ about start event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
-8. __Comms__ _expects finish_ event. 
-9. Dog crosses finish gate.
-10. __Finish gate__ _registers change_ in ToF sensor reading.
-11. __Finish gate__ _communicates event_ over ESP-NOW to comms.
-12. __Comms__ _registers the time_ of finish gate event.
-13. __Comms__ _gives feedback_ about finish event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
-14. __Comms__ _calculates_ the difference between finish and start gate events.
-16. __Comms__ _sends result_ time over serial port, and/or HTTP server.
-17. __Comms__ _resets_, expects start event.
+4. __Comms__ _expects start_ event.
+   - [ ] Detection flags are False.
+5. Dog starts run, crosses start gate.
+6. __Start gate__ _registers change_ in ToF sensor reading.
+   - [ ] When reading lower than threshold, turn LED on, send message to comms.
+   - [ ] When reading higher than threshold, turn LED off.
+7. __Start gate__ _communicates event_ over EPS-NOW to comms.
+ ~~  - [ ] When reading lower than threshold for the first time, set control variable true - to avoid sending multiple messages.~~
+ ~~  - [ ] When reading higher than threshold for the rist time, set control variable false.~~
+   - In fact NO! - let the gates send a ton of messages when reading an object, just in case of communications issues - allow comms to work it out.
+   - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
+8. __Comms__ _registers the time_ of start gate event.
+   - [ ] Set detection flag for start gate to true.
+   - [ ] Register the time in millis of start event.
+9. __Comms__ _gives feedback_ about start event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
+   - [ ] Send event information through serial to PC app.
+10. __Comms__ _expects finish_ event.
+   - [ ] Start detection flag is true, finish detection flag is false.
+11. Dog crosses finish gate.
+12. __Finish gate__ _registers change_ in ToF sensor reading.
+   - [ ] When reading lower than threshold, turn LED on, send message to comms.
+   - [ ] When reading higher than threshold, turn LED off.
+13. __Finish gate__ _communicates event_ over ESP-NOW to comms.
+   - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
+14. __Comms__ _registers the time_ of finish gate event.
+   - [ ] Set detection flag for finish gate to true.
+   - [ ] Register the time in millis of finish event.
+15. __Comms__ _gives feedback_ about finish event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
+   - [ ] Send event information through serial to PC app.
+16. __Comms__ _calculates_ the difference between finish and start gate events.
+   - [ ] Calculate difference between finish event and start event time.
+17. __Comms__ _sends result_ time over serial port, and/or HTTP server.
+   - [ ] Send result through serial.
+18. __Comms__ _resets_, expects start event.
+   - [ ] Reset flags.
 
 Additionally, the comms board should be able to:
 
