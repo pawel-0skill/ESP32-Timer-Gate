@@ -10,7 +10,7 @@
 */
 #include <Arduino.h>
 #include <Adafruit_VL53L0X.h>
-// #include <WiFi.h>
+#include <WiFi.h>
 #include <esp_now.h>
 
 // REPLACE WITH YOUR RECEIVER MAC Address
