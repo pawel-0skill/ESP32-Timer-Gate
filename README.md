@@ -40,8 +40,8 @@ Typical flow of events should be:
    - [ ] When reading lower than threshold, turn LED on, send message to comms.
    - [ ] When reading higher than threshold, turn LED off.
 7. __Start gate__ _communicates event_ over EPS-NOW to comms.
- ~~  - [ ] When reading lower than threshold for the first time, set control variable true - to avoid sending multiple messages.~~
- ~~  - [ ] When reading higher than threshold for the rist time, set control variable false.~~
+   - ~~[ ] When reading lower than threshold for the first time, set control variable true - to avoid sending multiple messages.~~
+   - ~~[ ] When reading higher than threshold for the rist time, set control variable false.~~
    - In fact NO! - let the gates send a ton of messages when reading an object, just in case of communications issues - allow comms to work it out.
    - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
 8. __Comms__ _registers the time_ of start gate event.
