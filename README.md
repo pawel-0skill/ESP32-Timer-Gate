@@ -50,24 +50,24 @@ Typical flow of events should be:
 9. __Comms__ _gives feedback_ about start event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
    - [ ] Send event information through serial to PC app.
 10. __Comms__ _expects finish_ event.
-   - [ ] Start detection flag is true, finish detection flag is false.
+    - [ ] Start detection flag is true, finish detection flag is false.
 11. Dog crosses finish gate.
 12. __Finish gate__ _registers change_ in ToF sensor reading.
-   - [ ] When reading lower than threshold, turn LED on, send message to comms.
-   - [ ] When reading higher than threshold, turn LED off.
+    - [ ] When reading lower than threshold, turn LED on, send message to comms.
+    - [ ] When reading higher than threshold, turn LED off.
 13. __Finish gate__ _communicates event_ over ESP-NOW to comms.
-   - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
+    - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
 14. __Comms__ _registers the time_ of finish gate event.
-   - [ ] Set detection flag for finish gate to true.
-   - [ ] Register the time in millis of finish event.
+    - [ ] Set detection flag for finish gate to true.
+    - [ ] Register the time in millis of finish event.
 15. __Comms__ _gives feedback_ about finish event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
-   - [ ] Send event information through serial to PC app.
+    - [ ] Send event information through serial to PC app.
 16. __Comms__ _calculates_ the difference between finish and start gate events.
-   - [ ] Calculate difference between finish event and start event time.
+    - [ ] Calculate difference between finish event and start event time.
 17. __Comms__ _sends result_ time over serial port, and/or HTTP server.
-   - [ ] Send result through serial.
+    - [ ] Send result through serial.
 18. __Comms__ _resets_, expects start event.
-   - [ ] Reset flags.
+    - [ ] Reset flags.
 
 Additionally, the comms board should be able to:
 
