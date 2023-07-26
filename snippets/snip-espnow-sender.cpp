@@ -8,12 +8,10 @@
   The above copyright notice and this permission notice shall be included in all
   copies or substantial portions of the Software.
 */
-
-#include <esp_now.h>
 #include <Arduino.h>
-#include <Wire.h>
-#include <VL53L0X.h>
-#include <WiFi.h>
+#include <Adafruit_VL53L0X.h>
+// #include <WiFi.h>
+#include <esp_now.h>
 
 // REPLACE WITH YOUR RECEIVER MAC Address
 uint8_t broadcastAddress[] = {0xA0, 0xB7, 0x65, 0x4D, 0x2B, 0xBC};

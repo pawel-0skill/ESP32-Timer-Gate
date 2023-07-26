@@ -8,11 +8,12 @@ Related repo - ESP32-Timer-GUI, to be done.
 
 Steps:
 
-0. 100% - learn how to code Arduino in VSC with Platform.io on ESP32
-1. 100% - re-learn VL53L0 (good enough for now at least - LED goes on when sensor reports something closer than 1200mm)
-2. 1% - learn ESP-NOW - this is going to be fun, as in poke my eyes out fun
-3. 0% - write code for the PC communications board
-4. 0% - write code for a time keeping program for the PC
+0. 100% - Learn how to code Arduino in VSC with Platform.io on ESP32
+1. 100% - Re-learn VL53L0 (good enough for now at least - LED goes on when sensor reports something closer than 1200mm)
+   - 100% - ~~take a step back, try to understand why the sensor does not sense up to 1200mm...~~ No issue, it works fine. Serial timing is shit - let's try to set the diode ON after reading for a full second.
+2. 10% - Learn ESP-NOW - this is going to be fun, as in poke my eyes out fun
+3. 5% - Write code for the PC communications board
+4. 0% - Write code for a time keeping program for the PC
 
 Future updates:
 
