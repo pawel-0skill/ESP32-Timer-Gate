@@ -51,6 +51,7 @@ Typical flow of events should be:
    - In fact NO! - let the gates send a ton of messages when reading an object, just in case of communications issues - allow comms to work it out.
    - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
    - Damn... If by _identifier_ I mean char "start" or "finish", that means Gates have different code - and I don't want that. Either hardcode Gate mac addresses in Comms, or make a hardware switch for Start or Finish. This second option seems more elegant... On the other hand, I'm hardcoding Comms address in Gates anyway, so what. For now - __hardcoding__.
+   - I _could_ try broadcasting events to anyone who listens over 0:0:0:0:0:0, but _theoreticaly_ some asshole could come, power up a fake Gate and post trigger events just for kicks (and yeah, this is quite possible, you wouldn't believe how salty the community around agility is here).
 8. __Comms__ _registers the time_ of start gate event.
    - [ ] Set detection flag for start gate to true.
    - [ ] Register the time in millis of start event.
