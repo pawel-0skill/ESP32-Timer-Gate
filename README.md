@@ -11,26 +11,29 @@ Steps:
 0. 100% - Learn how to code Arduino in VSC with Platform.io on ESP32.
 1. 100% - Re-learn VL53L0:
    - Good enough for now at least - LED goes on when sensor reports something closer than 1200mm.
-   - 80% - Take a step back, try to understand why the sensor does not sense up to 1200mm...
+   - 100% - Take a step back, try to understand why the sensor does not sense up to 1200mm...  
      No issue, it works fine. Serial timing is shit - let's try to set the diode ON after reading for a full second.
-2. 10% - Learn ESP-NOW - this is going to be fun, as in poke my eyes out fun.
-3. 5% - Write code for the PC communications board.
+     Works like a charm - buuuut small objects at high speed might fail to register. Two sensors per gate might be preferable - to be checked.
+2. 100% - Learn ESP-NOW - this is going to be fun, as in poke my eyes out fun.
+   - Rui Santos is king, go check <https://RandomNerdTutorials.com/esp-now-esp32-arduino-ide/>
+3. 50% - Write code for the PC communications board.
+   - Takes incoming messages, prints mac addresses, nice.
 4. 0% - Write code for a time keeping program for the PC.
 
 Future updates:
 
-1. Make it work on interrupts
+1. Make it work on interrupts, if it makes any sense. I'm starting to think it will make no sense at all, but we will see.
 
 ## How this is going to work
 
 Typical flow of events should be:
 
 1. __Gates__ are _ready_.
-   - [ ] Initialize ESP-NOW, connect to comms.
-   - [ ] Initialize ToF sensor.
+   - [X] Initialize ESP-NOW, connect to comms.
+   - [X] Initialize ToF sensor.
    - [ ] If pinged, respond accordingly.
 2. __Comms__ is _ready_.
-   - [ ] Initialize serial port communications.
+   - [X] Initialize serial port communications.
    - [ ] Initialize ESP-NOW, connect to start gate and finish gate - for pinging.
    - [ ] Ping gates.
    - [ ] Set detection flag variables to False.
@@ -47,11 +50,12 @@ Typical flow of events should be:
    - ~~[ ] When reading higher than threshold for the rist time, set control variable false.~~
    - In fact NO! - let the gates send a ton of messages when reading an object, just in case of communications issues - allow comms to work it out.
    - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
+   - Damn... If by _identifier_ I mean char "start" or "finish", that means Gates have different code - and I don't want that. Either hardcode Gate mac addresses in Comms, or make a hardware switch for Start or Finish. This second option seems more elegant... On the other hand, I'm hardcoding Comms address in Gates anyway, so what. For now - __hardcoding__.
 8. __Comms__ _registers the time_ of start gate event.
    - [ ] Set detection flag for start gate to true.
    - [ ] Register the time in millis of start event.
 9. __Comms__ _gives feedback_ about start event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
-   - [ ] Send event information through serial to PC app.
+   - [X] Send event information through serial to PC app.
 10. __Comms__ _expects finish_ event.
     - [ ] Start detection flag is true, finish detection flag is false.
 11. Dog crosses finish gate.
@@ -64,7 +68,7 @@ Typical flow of events should be:
     - [ ] Set detection flag for finish gate to true.
     - [ ] Register the time in millis of finish event.
 15. __Comms__ _gives feedback_ about finish event over serial port to PC GUI and/or change in LED state, and/or HTTP server.
-    - [ ] Send event information through serial to PC app.
+    - [X] Send event information through serial to PC app.
 16. __Comms__ _calculates_ the difference between finish and start gate events.
     - [ ] Calculate difference between finish event and start event time.
 17. __Comms__ _sends result_ time over serial port, and/or HTTP server.
@@ -82,3 +86,15 @@ On top of that, it would be nice if the comms board would be able to:
 
 1. Constantly report connection status of gate boards.
 2. Force remotely reset of gate boards.
+
+## Hardware design
+
+Housing for a gate will contain:
+
+1. NodeMCU-32 board.
+2. VL53L0X sensor.
+3. Status LEDs:
+   - Green for OK,
+   - Red for ERROR (could define different blinks for different situations),
+   - Yellow for sensor read feedback.
+4. USB power cable - power supplied from a powerbank, 5000mAh should be sufficient for two days.
