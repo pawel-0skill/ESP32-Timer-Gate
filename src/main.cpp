@@ -8,11 +8,15 @@ Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 // Set Comms address
 uint8_t broadcastAddress[] = {0xA0, 0xB7, 0x65, 0x4D, 0x2B, 0xBC};
 
-// Define data structure - we will just send either PING or EVENT 
+// Define message structure
 typedef struct struct_message {
-  char a[32];
+  char messageType[32]; // P for Pairing, E for Event
+  char gateType[32]; // S for Start, F for Finish
 } struct_message;
 struct_message gateMessage;
+
+// Define gate type variable
+char gType[32];
 
 // ESP-NOW magic, dunno
 esp_now_peer_info_t peerInfo;
@@ -21,14 +25,25 @@ esp_now_peer_info_t peerInfo;
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   //Serial.print("\r\nLast Packet Send Status:\t");
   //Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
-  digitalWrite(12, HIGH);
-  delay(100);
-  digitalWrite(12, LOW);
+  //digitalWrite(12, HIGH);
+  //delay(100);
+  //digitalWrite(12, LOW);
 }
 
 void setup() {
   // LED init
   pinMode(12, OUTPUT);
+
+  // Jumper init - if pin is not grounded, reads HIGH, else reads LOW. If it's LOW, set is as the Start gate, else set it as the Finish gate
+  pinMode(19, INPUT_PULLUP);
+  if (digitalRead(19) == LOW) {
+  //  digitalWrite(12, HIGH);
+  //  delay(5000);
+  //  digitalWrite(12, LOW);
+    strcpy(gType, "S");
+  } else {
+    strcpy(gType, "F");
+  }
 
   // WIFI init, set device as a WiFi Station, ESP-NOW init
   WiFi.mode(WIFI_STA);
@@ -77,14 +92,15 @@ void setup() {
 
 void loop() {
   // Set values to send
-  strcpy(gateMessage.a, "EVENT");
+  strcpy(gateMessage.messageType, "E");
+  strcpy(gateMessage.gateType, gType);
   
   // If target in range, communicate over ESP-NOW and turn the LED on
   // We will change it later to not keep that damn delay on, but it's fine for now
   if (lox.isRangeComplete() and lox.readRange()<1200) {
     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &gateMessage, sizeof(gateMessage));
-    digitalWrite(12, HIGH);
-    delay(500);
-    digitalWrite(12, LOW);
+  //  digitalWrite(12, HIGH);
+  //  delay(500);
+  //  digitalWrite(12, LOW);
   }
 }

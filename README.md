@@ -29,6 +29,7 @@ Future updates:
 Typical flow of events should be:
 
 1. __Gates__ are _ready_.
+   - [X] Check jumper setting, set internal identification to START or FINISH.
    - [X] Initialize ESP-NOW, connect to comms.
    - [X] Initialize ToF sensor.
    - [ ] If pinged, respond accordingly.
@@ -43,7 +44,8 @@ Typical flow of events should be:
    - [ ] Detection flags are False.
 5. Dog starts run, crosses start gate.
 6. __Start gate__ _registers change_ in ToF sensor reading.
-   - [ ] When reading lower than threshold, turn LED on, send message to comms.
+   - [X] When reading lower than threshold, send message to comms.
+   - [ ] Turn LED on.
    - [ ] When reading higher than threshold, turn LED off.
 7. __Start gate__ _communicates event_ over EPS-NOW to comms.
    - ~~[ ] When reading lower than threshold for the first time, set control variable true - to avoid sending multiple messages.~~
@@ -62,7 +64,8 @@ Typical flow of events should be:
     - [ ] Start detection flag is true, finish detection flag is false.
 11. Dog crosses finish gate.
 12. __Finish gate__ _registers change_ in ToF sensor reading.
-    - [ ] When reading lower than threshold, turn LED on, send message to comms.
+    - [X] When reading lower than threshold, send message to comms.
+    - [ ] Turn LED on.
     - [ ] When reading higher than threshold, turn LED off.
 13. __Finish gate__ _communicates event_ over ESP-NOW to comms.
     - [ ] Send gate identifier and detection event message. Keep sending as long as sensor registers distance lower than threshold.
@@ -96,7 +99,8 @@ Housing for a gate will contain:
 1. NodeMCU-32 board.
 2. VL53L0X sensor.
 3. Status LEDs:
-   - Green for OK,
-   - Red for ERROR (could define different blinks for different situations),
+   - Green for OK, could blink differently depending on init stage, to confirm what's OK or what's wrong, until it goes contant when connected,
+   - Red for ERROR, could define different blinks for different situations,
    - Yellow for sensor read feedback.
 4. USB power cable - power supplied from a powerbank, 5000mAh should be sufficient for two days.
+5. Jumper to switch between Start and Finish gate identification - P19 to GND or to air.
