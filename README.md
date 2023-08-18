@@ -9,12 +9,14 @@ Related repo - ESP32-Timer-GUI, to be done (or not, BT serial monitor might do t
 Steps:
 
 0. 100% - Learn how to code Arduino in VSC with Platform.io on ESP32.
-1. 100% - Re-learn VL53L0:
+1. 80% - Re-learn VL53L0:
    - Good enough for now at least - LED goes on when sensor reports something closer than 1200mm.
    - 100% - Take a step back, try to understand why the sensor does not sense up to 1200mm...  
      No issue, it works fine. Serial timing is shit - let's try to set the diode ON after reading for a full second.
      Works like a charm - buuuut small objects at high speed might fail to register. Two sensors per gate might be preferable - to be checked.
      Oh yeah, two sensors working in parallel are the way to go!
+   ~~- 0% - Take another step back, learn how to make it work with a cover and not generating false positives. Cross-talk? Offset? Time to read the API documentation and find some examples.~~
+   - 0% - Yeah, that's not it. Adafruit example code for dual sensor setup works fine. Seems I have an issue with my code... Lovely. So - fix the damn code, go line by line vs example.
 2. 100% - Learn ESP-NOW - this is going to be fun, as in poke my eyes out fun.
    - Rui Santos is king, go check <https://RandomNerdTutorials.com/esp-now-esp32-arduino-ide/>
 3. 100% - Write code for the PC communications board.
@@ -24,12 +26,13 @@ Steps:
    - Add a second ToF sensor per gate - parts just arrived! With additional housing for the sensor itself.
    - Consider minimal measuring time allocation - no need to be precise.
 5. 0% - Add a RESET button on Comms.
-6. 0% - Add BT communication to send serial messages out.
-7. 0% - Add state LEDs to gates and comms.
-   - For comms, that's quite easy in single thread - basically most of the stuff is handled by OnReceive, so the loop can read blink the lighties... _Assuming_ that this will not block OnReceive from working at that time. Otherwise - multithreads, here we come!
-   - For gates, it's multihtreads anyway.
-   - _Or_ if I actually think this through and stop delaying my code like an animal, and check for millis to operate those LEDs, nothing will be blocked from executing by no damn delay, and I can leave threads out of it until I actually want them.
-8. 0% - Write code for a time keeping program for the PC.
+6. ~~0% - Add BT communication to send serial messages out.~~
+7. ~~0% - Add state LEDs to gates and comms.~~
+   ~~- For comms, that's quite easy in single thread - basically most of the stuff is handled by OnReceive, so the loop can read blink the lighties... _Assuming_ that this will not block OnReceive from working at that time. Otherwise - multithreads, here we come!~~
+   ~~- For gates, it's multihtreads anyway.~~
+   ~~- _Or_ if I actually think this through and stop delaying my code like an animal, and check for millis to operate those LEDs, nothing will be blocked from executing by no damn delay, and I can leave threads out of it until I actually want them.~~
+8. ~~0% - Write code for a time keeping program for the PC.~~
+9. 10% - Add an OLED display to Comms, display whatever is needed.
 
 Future updates:
 
