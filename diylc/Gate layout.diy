@@ -522,8 +522,8 @@
       <alpha>127</alpha>
       <points>
         <point x="4.0" y="3.3"/>
-        <point x="3.8" y="3.3"/>
-        <point x="3.9" y="3.3"/>
+        <point x="3.8" y="3.4"/>
+        <point x="3.9" y="3.35"/>
       </points>
       <bodyColor hex="ffffff"/>
       <borderColor hex="000000"/>
@@ -541,9 +541,9 @@
       <name>Trace24</name>
       <alpha>127</alpha>
       <points>
-        <point x="3.8" y="3.2"/>
+        <point x="3.8" y="3.3"/>
         <point x="4.2" y="3.2"/>
-        <point x="4.0" y="3.2"/>
+        <point x="4.0" y="3.25"/>
       </points>
       <bodyColor hex="ffffff"/>
       <borderColor hex="000000"/>
@@ -982,8 +982,8 @@
         <point x="4.0" y="4.0"/>
         <point x="4.0" y="4.05"/>
       </points>
-      <bodyColor hex="5dfc0a"/>
-      <borderColor hex="41b007"/>
+      <bodyColor hex="ff0033"/>
+      <borderColor hex="cc0033"/>
       <labelColor hex="000000"/>
       <leadColor hex="cccccc"/>
       <display>NAME</display>
@@ -1248,7 +1248,7 @@
       <name>LAB33</name>
       <point x="3.8" y="3.2"/>
       <text>P35</text>
-      <font name="Dialog.bolditalic" size="14" style="3"/>
+      <font name="Dialog.italic" size="14" style="2"/>
       <color hex="000000"/>
       <horizontalAlignment>RIGHT</horizontalAlignment>
       <verticalAlignment>CENTER</verticalAlignment>
@@ -1268,7 +1268,7 @@
       <name>LAB35</name>
       <point x="3.8" y="3.4"/>
       <text>P33</text>
-      <font name="Dialog.italic" size="14" style="2"/>
+      <font name="Dialog.bolditalic" size="14" style="3"/>
       <color hex="000000"/>
       <horizontalAlignment>RIGHT</horizontalAlignment>
       <verticalAlignment>CENTER</verticalAlignment>
@@ -1613,9 +1613,10 @@
       <orientation>DEFAULT</orientation>
       <controlPoints>
         <point x="2.9" y="3.1"/>
+        <point x="2.9" y="3.2"/>
       </controlPoints>
       <rowCount>1</rowCount>
-      <columnCount>1</columnCount>
+      <columnCount>2</columnCount>
       <spacing value="0.1" unit="in"/>
       <shrouded>false</shrouded>
       <bodyColor hex="cccccc"/>
@@ -1626,8 +1627,8 @@
       <alpha>127</alpha>
       <orientation>DEFAULT</orientation>
       <controlPoints>
-        <point x="2.9" y="3.2"/>
         <point x="2.9" y="3.3"/>
+        <point x="2.9" y="3.4"/>
       </controlPoints>
       <rowCount>1</rowCount>
       <columnCount>2</columnCount>
@@ -1641,13 +1642,12 @@
       <alpha>127</alpha>
       <orientation>DEFAULT</orientation>
       <controlPoints>
-        <point x="2.9" y="3.4"/>
         <point x="2.9" y="3.5"/>
         <point x="2.9" y="3.6"/>
         <point x="2.9" y="3.7"/>
       </controlPoints>
       <rowCount>1</rowCount>
-      <columnCount>4</columnCount>
+      <columnCount>3</columnCount>
       <spacing value="0.1" unit="in"/>
       <shrouded>false</shrouded>
       <bodyColor hex="cccccc"/>
@@ -1792,8 +1792,8 @@
     </diylc.misc.Label>
     <diylc.misc.Label>
       <name>LAB55</name>
-      <point x="2.8" y="3.2"/>
-      <text>P35</text>
+      <point x="2.8" y="3.4"/>
+      <text>P33</text>
       <font name="Dialog.bold" size="14" style="1"/>
       <color hex="000000"/>
       <horizontalAlignment>RIGHT</horizontalAlignment>

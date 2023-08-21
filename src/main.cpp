@@ -8,8 +8,15 @@
 #define LOX2_ADDRESS 0x31
 
 // set the pins to shutdown
-#define SHT_LOX1 25
-#define SHT_LOX2 26
+#define SHT_LOX1 3 //25
+#define SHT_LOX2 4 //26
+
+// Set pins for LEDs
+#define LED_RED 32
+#define LED_GREEN 33
+
+// Set pin for jumper selector
+#define GATE_SELECT 15
 
 // objects for the vl53l0x
 Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
@@ -45,6 +52,10 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 
 void setup() {
   Serial.begin(115200);
+  
+  // LED pin test
+  pinMode(LED_GREEN, OUTPUT);
+  pinMode(LED_RED, OUTPUT);
 
   // wait until serial port opens for native USB devices
   while (! Serial) { delay(1); }
@@ -92,8 +103,8 @@ void setup() {
   lox2.configSensor(Adafruit_VL53L0X::VL53L0X_SENSE_HIGH_SPEED);
 
   // Jumper init - if pin is not grounded, reads HIGH, else reads LOW. If it's LOW, set is as the Start gate, else set it as the Finish gate
-  pinMode(19, INPUT_PULLUP);
-  if (digitalRead(19) == LOW) {
+  pinMode(GATE_SELECT, INPUT_PULLUP);
+  if (digitalRead(GATE_SELECT) == LOW) {
     strcpy(gType, "S");
   } else {
     strcpy(gType, "F");
@@ -148,4 +159,7 @@ void loop() {
 
   Serial.println(objectDetected);
   // delay(10);
+
+  digitalWrite(LED_RED, HIGH);
+  digitalWrite(LED_GREEN, HIGH);
 }
