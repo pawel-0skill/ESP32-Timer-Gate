@@ -9,14 +9,15 @@ Related repo - ESP32-Timer-GUI, to be done (or not, BT serial monitor might do t
 Steps:
 
 0. 100% - Learn how to code Arduino in VSC with Platform.io on ESP32.
-1. 80% - Re-learn VL53L0:
+1. 90% - Re-learn VL53L0:
    - Good enough for now at least - LED goes on when sensor reports something closer than 1200mm.
    - 100% - Take a step back, try to understand why the sensor does not sense up to 1200mm...  
      No issue, it works fine. Serial timing is shit - let's try to set the diode ON after reading for a full second.
      Works like a charm - buuuut small objects at high speed might fail to register. Two sensors per gate might be preferable - to be checked.
      Oh yeah, two sensors working in parallel are the way to go!
    ~~- 0% - Take another step back, learn how to make it work with a cover and not generating false positives. Cross-talk? Offset? Time to read the API documentation and find some examples.~~
-   - 0% - Yeah, that's not it. Adafruit example code for dual sensor setup works fine. Seems I have an issue with my code... Lovely. So - fix the damn code, go line by line vs example.
+   - 100% - Yeah, that's not it. Adafruit example code for dual sensor setup works fine. Seems I have an issue with my code... Lovely. So - fix the damn code, go line by line vs example.
+   - I have no idea what I'm doing. So let's take Adafruit's example for dual sensors, modify it, and add ESP-NOW code to it from my original attempt - aaand it works.
 2. 100% - Learn ESP-NOW - this is going to be fun, as in poke my eyes out fun.
    - Rui Santos is king, go check <https://RandomNerdTutorials.com/esp-now-esp32-arduino-ide/>
 3. 100% - Write code for the PC communications board.
